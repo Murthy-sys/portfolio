@@ -44,7 +44,7 @@ const Experience = () => {
       id: 3,
       title: "Analyst",
       company: "Fidelity National Financial India",
-      location: "Bangalore, India", 
+      location: "Bangalore, India",
       duration: "08/2017 - 01/2020",
       type: "Full-time",
       achievements: [
@@ -59,19 +59,27 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-dark-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="py-20 bg-seagreen-50/30 dark:bg-dark-800 relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 bg-dots opacity-20"></div>
+      <motion.div
+        animate={{ y: [0, -20, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-10 right-10 w-32 h-32 bg-seagreen-200/20 dark:bg-seagreen-800/10 rounded-full blur-2xl"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Professional <span className="bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">Experience</span>
+            Professional <span className="bg-gradient-to-r from-seagreen-500 to-accent-500 bg-clip-text text-transparent">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-purple-600 mx-auto rounded-full mb-4"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-seagreen-500 to-accent-500 mx-auto rounded-full mb-4"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Over 7 years of experience in front-end development and technical leadership
           </p>
@@ -79,24 +87,31 @@ const Experience = () => {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-600 to-purple-600"></div>
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-seagreen-500 to-accent-500"></div>
 
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.7, delay: index * 0.2, ease: "easeOut" }}
               viewport={{ once: true }}
               className={`relative flex items-center mb-12 ${
                 index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
               }`}
             >
               {/* Timeline dot */}
-              <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-r from-primary-600 to-purple-600 rounded-full border-4 border-white dark:border-dark-800 z-10">
-                {exp.isLatest && (
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-600 to-purple-600 animate-ping"></div>
-                )}
+              <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 z-10">
+                <motion.div
+                  whileInView={{ scale: [0, 1.3, 1] }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  viewport={{ once: true }}
+                  className="w-5 h-5 bg-gradient-to-r from-seagreen-500 to-accent-500 rounded-full border-4 border-white dark:border-dark-800 shadow-lg"
+                >
+                  {exp.isLatest && (
+                    <div className="absolute inset-0 rounded-full bg-seagreen-500 animate-ping opacity-40"></div>
+                  )}
+                </motion.div>
               </div>
 
               {/* Content */}
@@ -104,16 +119,16 @@ const Experience = () => {
                 index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
               }`}>
                 <motion.div
-                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                  className="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-800"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-400 border border-seagreen-100/50 dark:border-seagreen-800/20 glow-seagreen"
                 >
-                  {/* Header */}
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
                         {exp.title}
                       </h3>
-                      <div className="flex items-center gap-2 text-primary-600 dark:text-primary-400 font-semibold mb-2">
+                      <div className="flex items-center gap-2 text-seagreen-600 dark:text-seagreen-400 font-semibold mb-2">
                         <Briefcase className="w-4 h-4" />
                         {exp.company}
                       </div>
@@ -129,36 +144,42 @@ const Experience = () => {
                       </div>
                     </div>
                     {exp.isLatest && (
-                      <span className="bg-gradient-to-r from-primary-600 to-purple-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                      <span className="bg-gradient-to-r from-seagreen-500 to-accent-500 text-white text-xs px-3 py-1 rounded-full font-medium animate-pulse">
                         Current
                       </span>
                     )}
                   </div>
 
-                  {/* Achievements */}
                   <div className="mb-4">
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Key Achievements</h4>
                     <ul className="space-y-2">
                       {exp.achievements.map((achievement, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm">
-                          <ChevronRight className="w-3 h-3 text-primary-600 mt-1 flex-shrink-0" />
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 + idx * 0.05 }}
+                          viewport={{ once: true }}
+                          className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm"
+                        >
+                          <ChevronRight className="w-3 h-3 text-seagreen-500 mt-1 flex-shrink-0" />
                           <span>{achievement}</span>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Technologies */}
                   <div>
                     <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Technologies Used</h4>
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, idx) => (
-                        <span
+                        <motion.span
                           key={idx}
-                          className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-md text-xs font-medium"
+                          whileHover={{ scale: 1.1 }}
+                          className="bg-seagreen-50 dark:bg-seagreen-900/20 text-seagreen-700 dark:text-seagreen-300 px-2 py-1 rounded-md text-xs font-medium border border-seagreen-200/50 dark:border-seagreen-700/30 transition-all duration-300"
                         >
                           {tech}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
                   </div>
@@ -168,25 +189,28 @@ const Experience = () => {
           ))}
         </div>
 
-        {/* Education Section */}
+        {/* Education */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
           className="mt-20"
         >
           <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Education</h3>
-          <div className="bg-white dark:bg-dark-900 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-800 max-w-2xl mx-auto">
+          <motion.div
+            whileHover={{ scale: 1.02, y: -3 }}
+            className="bg-white dark:bg-dark-900 rounded-xl p-8 shadow-lg border border-seagreen-100/50 dark:border-seagreen-800/20 max-w-2xl mx-auto glow-seagreen"
+          >
             <div className="flex items-start gap-4">
-              <div className="bg-gradient-to-r from-primary-600 to-purple-600 p-3 rounded-lg">
+              <div className="bg-gradient-to-r from-seagreen-500 to-accent-500 p-3 rounded-lg">
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
                 <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   Bachelor of Technology (B.Tech)
                 </h4>
-                <p className="text-primary-600 dark:text-primary-400 font-semibold mb-2">
+                <p className="text-seagreen-600 dark:text-seagreen-400 font-semibold mb-2">
                   Electrical, Electronics And Communications Engineering
                 </p>
                 <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
@@ -198,7 +222,7 @@ const Experience = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

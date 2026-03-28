@@ -21,39 +21,81 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - sea green theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background: #f0fdf7;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  background: #2e8b57;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500 dark:bg-gray-500;
+  background: #1a7a4a;
 }
 
-/* Smooth transitions */
-* {
-  transition: all 0.3s ease;
-}
-
-/* Glass morphism effect */
+/* Glass morphism effect - sea green tinted */
 .glass {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(255, 255, 255, 0.75);
-  border: 1px solid rgba(209, 213, 219, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(46, 139, 87, 0.15);
 }
 
 .glass-dark {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(46, 139, 87, 0.2);
+}
+
+/* Particle / floating background dots */
+.bg-dots {
+  background-image: radial-gradient(circle, rgba(46, 139, 87, 0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Gradient text shimmer */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #2e8b57 0%,
+    #14b8a6 25%,
+    #2ed8a3 50%,
+    #14b8a6 75%,
+    #2e8b57 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Glow effect for cards */
+.glow-seagreen {
+  box-shadow: 0 0 15px rgba(46, 139, 87, 0.15), 0 0 30px rgba(46, 139, 87, 0.05);
+  transition: box-shadow 0.4s ease;
+}
+
+.glow-seagreen:hover {
+  box-shadow: 0 0 25px rgba(46, 139, 87, 0.3), 0 0 50px rgba(46, 139, 87, 0.1);
+}
+
+/* Border gradient utility */
+.border-gradient {
+  border-image: linear-gradient(135deg, #2e8b57, #14b8a6) 1;
+}
+
+/* Smooth section transitions */
+section {
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
