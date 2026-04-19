@@ -1,228 +1,224 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, ChevronRight, GraduationCap } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Briefcase, MapPin, Calendar, GraduationCap } from 'lucide-react';
+import SectionHeading from './SectionHeading';
 
-const Experience = () => {
-  const experiences = [
-    {
-      id: 1,
-      title: "Technical Lead",
-      company: "Wissen Infotech Pvt. Ltd.",
-      location: "Bangalore, India",
-      duration: "01/2022 - Current",
-      type: "Full-time",
-      achievements: [
-        "Developed interactive employee and manager modules for internal service portal using React.js and Redux",
-        "Created reusable components and integrated Redux for effective state management",
-        "Ensured responsive UI across browsers by integrating REST APIs",
-        "Designed modular Vue components and managed workflows with Vuex for DPSys project",
-        "Participated in Agile ceremonies to foster team collaboration",
-        "Focused on dynamic, data-driven UI to improve design lifecycle management",
-        "Designed dashboards for RAMP project to evaluate engine airworthiness efficiently",
-        "Enhanced UI performance through rigorous validations and seamless API integrations"
-      ],
-      technologies: ["React.js", "Redux", "Vue.js", "Vuex", "REST APIs", "JavaScript", "HTML5", "CSS3"],
-      isLatest: true
-    },
-    {
-      id: 2,
-      title: "Senior Analyst",
-      company: "Fidelity National Financial India",
-      location: "Bangalore, India",
-      duration: "07/2020 - 02/2022",
-      type: "Full-time",
-      achievements: [
-        "Developed comprehensive reports for management using advanced analytical tools",
-        "Collaborated with cross-functional teams to improve operational processes and efficiencies",
-        "Implemented data-driven solutions to optimize business workflows",
-        "Participated in requirement gathering and solution design sessions"
-      ],
-      technologies: ["Analytics Tools", "Data Visualization", "Process Optimization"],
-      isLatest: false
-    },
-    {
-      id: 3,
-      title: "Analyst",
-      company: "Fidelity National Financial India",
-      location: "Bangalore, India",
-      duration: "08/2017 - 01/2020",
-      type: "Full-time",
-      achievements: [
-        "Collaborated with teams to improve operational processes and efficiencies",
-        "Analyzed business requirements and provided technical solutions",
-        "Supported various projects with analytical and technical expertise",
-        "Gained foundational experience in financial services domain"
-      ],
-      technologies: ["Business Analysis", "Process Improvement", "Technical Documentation"],
-      isLatest: false
-    }
-  ];
+const experiences = [
+  {
+    id: 1,
+    title: 'Technical Lead',
+    company: 'Wissen Infotech Pvt. Ltd.',
+    location: 'Bangalore, India',
+    duration: '01/2022 — Present',
+    achievements: [
+      'Architected employee & manager modules of internal service portal using React.js and Redux',
+      'Designed modular Vue components and managed workflows with Vuex for DPSys',
+      'Built RAMP dashboards evaluating engine airworthiness with data-driven UI',
+      'Integrated REST APIs and drove UI performance through rigorous validation',
+    ],
+    technologies: ['React.js', 'Redux', 'Vue.js', 'Vuex', 'REST', 'TypeScript'],
+    isLatest: true,
+  },
+  {
+    id: 2,
+    title: 'Senior Analyst',
+    company: 'Fidelity National Financial',
+    location: 'Bangalore, India',
+    duration: '07/2020 — 02/2022',
+    achievements: [
+      'Shipped comprehensive management reports with advanced analytical tooling',
+      'Partnered with cross-functional teams to optimize operational workflows',
+      'Implemented data-driven automation to streamline recurring processes',
+    ],
+    technologies: ['Analytics', 'SQL', 'Process Optimization'],
+  },
+  {
+    id: 3,
+    title: 'Analyst',
+    company: 'Fidelity National Financial',
+    location: 'Bangalore, India',
+    duration: '08/2017 — 01/2020',
+    achievements: [
+      'Collaborated across teams to improve operational KPIs',
+      'Analyzed requirements and delivered technical solutions for financial workflows',
+      'Established foundations in financial services and enterprise analysis',
+    ],
+    technologies: ['Business Analysis', 'Documentation', 'Financial Services'],
+  },
+];
+
+const Experience = ({ darkMode }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 85%', 'end 15%'],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="experience" className="py-20 bg-seagreen-50/30 dark:bg-dark-800 relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="absolute inset-0 bg-dots opacity-20"></div>
-      <motion.div
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-10 right-10 w-32 h-32 bg-seagreen-200/20 dark:bg-seagreen-800/10 rounded-full blur-2xl"
-      />
+    <section
+      id="experience"
+      className={`relative py-28 sm:py-36 ${
+        darkMode ? 'bg-ink-900/50' : 'bg-white'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <SectionHeading
+          darkMode={darkMode}
+          eyebrow="02 / CAREER"
+          title="A record of"
+          highlight="shipping at scale."
+          description="Nine years across enterprise finance, aviation compliance, and internal tooling — building things people use every day."
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Professional <span className="bg-gradient-to-r from-seagreen-500 to-accent-500 bg-clip-text text-transparent">Experience</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-seagreen-500 to-accent-500 mx-auto rounded-full mb-4"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Over 7 years of experience in front-end development and technical leadership
-          </p>
-        </motion.div>
+        <div ref={ref} className="relative">
+          <div className={`absolute left-[18px] md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px ${
+            darkMode ? 'bg-ink-800' : 'bg-ink-200'
+          }`} />
+          <motion.div
+            style={{ height: lineHeight }}
+            className="absolute left-[18px] md:left-1/2 md:-translate-x-px top-0 w-px bg-gradient-to-b from-brand-500 via-brand-400 to-glow-500 origin-top"
+          />
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-seagreen-500 to-accent-500"></div>
-
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: index * 0.2, ease: "easeOut" }}
-              viewport={{ once: true }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 z-10">
+          {experiences.map((exp, index) => {
+            const onLeft = index % 2 === 0;
+            return (
+              <motion.div
+                key={exp.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className={`relative mb-16 grid md:grid-cols-2 gap-6 md:gap-12 ${
+                  onLeft ? '' : 'md:[&>*:first-child]:order-2'
+                }`}
+              >
+                {/* Node */}
                 <motion.div
-                  whileInView={{ scale: [0, 1.3, 1] }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
-                  className="w-5 h-5 bg-gradient-to-r from-seagreen-500 to-accent-500 rounded-full border-4 border-white dark:border-dark-800 shadow-lg"
+                  transition={{ delay: 0.15, type: 'spring', stiffness: 220 }}
+                  className="absolute left-[18px] md:left-1/2 top-6 -translate-x-1/2 z-10"
                 >
-                  {exp.isLatest && (
-                    <div className="absolute inset-0 rounded-full bg-seagreen-500 animate-ping opacity-40"></div>
-                  )}
-                </motion.div>
-              </div>
-
-              {/* Content */}
-              <div className={`w-full md:w-1/2 ml-12 md:ml-0 ${
-                index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
-              }`}>
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-400 border border-seagreen-100/50 dark:border-seagreen-800/20 glow-seagreen"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
-                        {exp.title}
-                      </h3>
-                      <div className="flex items-center gap-2 text-seagreen-600 dark:text-seagreen-400 font-semibold mb-2">
-                        <Briefcase className="w-4 h-4" />
-                        {exp.company}
-                      </div>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {exp.location}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {exp.duration}
-                        </div>
-                      </div>
-                    </div>
+                  <div className="relative">
+                    <div className={`w-4 h-4 rounded-full bg-gradient-to-br from-brand-400 to-glow-500 ring-4 ${
+                      darkMode ? 'ring-ink-950' : 'ring-white'
+                    }`} />
                     {exp.isLatest && (
-                      <span className="bg-gradient-to-r from-seagreen-500 to-accent-500 text-white text-xs px-3 py-1 rounded-full font-medium animate-pulse">
-                        Current
+                      <div className="absolute inset-0 rounded-full bg-brand-400 animate-pulse-ring" />
+                    )}
+                  </div>
+                </motion.div>
+
+                {/* Card */}
+                <div className={`${onLeft ? 'md:pr-12 md:text-right' : 'md:pl-12'} pl-12 md:pl-0`}>
+                  <div className={`inline-flex items-center gap-2 font-mono text-[10px] tracking-widest uppercase mb-3 ${
+                    darkMode ? 'text-ink-500' : 'text-ink-400'
+                  }`}>
+                    <Calendar className="w-3 h-3" />
+                    {exp.duration}
+                    {exp.isLatest && (
+                      <span className="ml-2 px-2 py-0.5 rounded-full bg-brand-500/15 text-brand-400 border border-brand-500/30">
+                        CURRENT
                       </span>
                     )}
                   </div>
 
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Key Achievements</h4>
-                    <ul className="space-y-2">
-                      {exp.achievements.map((achievement, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -10 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.3 + idx * 0.05 }}
-                          viewport={{ once: true }}
-                          className="flex items-start gap-2 text-gray-600 dark:text-gray-300 text-sm"
-                        >
-                          <ChevronRight className="w-3 h-3 text-seagreen-500 mt-1 flex-shrink-0" />
-                          <span>{achievement}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
+                  <h3 className={`font-display font-semibold text-2xl sm:text-3xl mb-1 ${
+                    darkMode ? 'text-white' : 'text-ink-900'
+                  }`}>
+                    {exp.title}
+                  </h3>
+
+                  <div className={`flex flex-wrap items-center gap-3 text-sm mb-4 ${onLeft ? 'md:justify-end' : ''}`}>
+                    <span className="inline-flex items-center gap-1.5 text-brand-400">
+                      <Briefcase className="w-3.5 h-3.5" />
+                      {exp.company}
+                    </span>
+                    <span className={darkMode ? 'text-ink-500' : 'text-ink-400'}>·</span>
+                    <span className={`inline-flex items-center gap-1.5 ${
+                      darkMode ? 'text-ink-500' : 'text-ink-400'
+                    }`}>
+                      <MapPin className="w-3.5 h-3.5" />
+                      {exp.location}
+                    </span>
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">Technologies Used</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, idx) => (
-                        <motion.span
-                          key={idx}
-                          whileHover={{ scale: 1.1 }}
-                          className="bg-seagreen-50 dark:bg-seagreen-900/20 text-seagreen-700 dark:text-seagreen-300 px-2 py-1 rounded-md text-xs font-medium border border-seagreen-200/50 dark:border-seagreen-700/30 transition-all duration-300"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
+                  <ul className={`space-y-2 text-sm ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
+                    {exp.achievements.map((a, i) => (
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: onLeft ? 10 : -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.06 }}
+                        className={`flex gap-2 ${onLeft ? 'md:flex-row-reverse md:text-right' : ''}`}
+                      >
+                        <span className="text-brand-400 mt-1 shrink-0">›</span>
+                        <span>{a}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <div className={`mt-5 flex flex-wrap gap-2 ${onLeft ? 'md:justify-end' : ''}`}>
+                    {exp.technologies.map((t) => (
+                      <span
+                        key={t}
+                        className={`font-mono text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full border ${
+                          darkMode
+                            ? 'border-ink-800 bg-ink-900/70 text-ink-300'
+                            : 'border-ink-200 bg-ink-50 text-ink-700'
+                        }`}
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+                </div>
+
+                {/* empty spacer for the other column */}
+                <div className="hidden md:block" />
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Education */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
           className="mt-20"
         >
-          <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Education</h3>
-          <motion.div
-            whileHover={{ scale: 1.02, y: -3 }}
-            className="bg-white dark:bg-dark-900 rounded-xl p-8 shadow-lg border border-seagreen-100/50 dark:border-seagreen-800/20 max-w-2xl mx-auto glow-seagreen"
-          >
-            <div className="flex items-start gap-4">
-              <div className="bg-gradient-to-r from-seagreen-500 to-accent-500 p-3 rounded-lg">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
-              <div className="flex-1">
-                <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  Bachelor of Technology (B.Tech)
-                </h4>
-                <p className="text-seagreen-600 dark:text-seagreen-400 font-semibold mb-2">
-                  Electrical, Electronics And Communications Engineering
-                </p>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-500 dark:text-gray-400">
-                  <span>Sri Venkateswara Institute of Technologies</span>
-                  <span>•</span>
-                  <span>Anantapur</span>
-                  <span>•</span>
-                  <span>04/2016</span>
-                </div>
-              </div>
+          <h3 className={`font-display font-semibold text-2xl mb-6 ${
+            darkMode ? 'text-white' : 'text-ink-900'
+          }`}>
+            Education
+          </h3>
+          <div className={`flex items-start gap-5 p-6 rounded-2xl border ${
+            darkMode ? 'bg-ink-900/60 border-ink-800' : 'bg-white border-ink-200'
+          }`}>
+            <div className="p-3 rounded-lg bg-gradient-to-br from-brand-500 to-glow-500 shrink-0">
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
-          </motion.div>
+            <div>
+              <p className={`font-display font-semibold text-lg ${
+                darkMode ? 'text-white' : 'text-ink-900'
+              }`}>
+                B.Tech — Electronics &amp; Communications Engineering
+              </p>
+              <p className="text-sm text-brand-400 mt-0.5">
+                Sri Venkateswara Institute of Technologies
+              </p>
+              <p className={`mt-1 font-mono text-xs tracking-wider ${
+                darkMode ? 'text-ink-500' : 'text-ink-400'
+              }`}>
+                Anantapur · 04/2016
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

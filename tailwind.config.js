@@ -1,130 +1,104 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0fdf7',
-          100: '#ccfbeb',
-          200: '#9af5d6',
-          300: '#5eebbe',
-          400: '#2ed8a3',
-          500: '#2e8b57',
-          600: '#1a7a4a',
-          700: '#16613c',
-          800: '#154d32',
-          900: '#13402b',
+        // Deep obsidian base for a refined, professional look
+        ink: {
+          50:  '#f6f6f7',
+          100: '#e6e6e9',
+          200: '#c9c9cf',
+          300: '#a1a1ab',
+          400: '#6e6e7a',
+          500: '#4a4a55',
+          600: '#32323b',
+          700: '#23232b',
+          800: '#17171d',
+          900: '#0e0e13',
+          950: '#07070a',
         },
-        seagreen: {
-          50: '#f0fdf7',
-          100: '#ccfbeb',
-          200: '#9af5d6',
-          300: '#5eebbe',
-          400: '#2ed8a3',
-          500: '#2e8b57',
-          600: '#1a7a4a',
-          700: '#16613c',
-          800: '#154d32',
-          900: '#13402b',
+        // Indigo / violet primary accent
+        brand: {
+          50:  '#eef0ff',
+          100: '#dde1ff',
+          200: '#bdc3ff',
+          300: '#9ba3ff',
+          400: '#7c80f7',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#2a2580',
+          950: '#1a1852',
         },
-        accent: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
+        // Warm secondary highlight
+        glow: {
+          50:  '#fff8eb',
+          100: '#ffebc6',
+          200: '#ffd488',
+          300: '#ffb94a',
+          400: '#fba524',
+          500: '#f59e0b',
+          600: '#d67b06',
+          700: '#b15908',
+          800: '#8f440d',
+          900: '#75380e',
         },
-        dark: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
-        }
       },
       fontFamily: {
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui'],
-        'mono': ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        display: ['"Space Grotesk"', 'Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular'],
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
       },
       animation: {
-        'fade-in-up': 'fadeInUp 0.6s ease-out',
-        'fade-in-down': 'fadeInDown 0.6s ease-out',
-        'slide-in-left': 'slideInLeft 0.6s ease-out',
-        'slide-in-right': 'slideInRight 0.6s ease-out',
-        'bounce-slow': 'bounce 3s infinite',
-        'pulse-slow': 'pulse 4s infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'float-delay': 'float 6s ease-in-out 3s infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'shimmer': 'shimmer 2.5s linear infinite',
-        'rotate-slow': 'rotateSlow 12s linear infinite',
-        'scale-pulse': 'scalePulse 3s ease-in-out infinite',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'gradient-shift': 'gradientShift 8s linear infinite',
+        'marquee': 'marquee 30s linear infinite',
+        'float-slow': 'floatSlow 9s ease-in-out infinite',
+        'pulse-ring': 'pulseRing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shimmer': 'shimmer 3s linear infinite',
+        'border-spin': 'borderSpin 6s linear infinite',
+        'blink': 'blink 1s steps(2) infinite',
       },
       keyframes: {
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        gradientShift: {
+          '0%,100%': { backgroundPosition: '0% 50%' },
+          '50%':     { backgroundPosition: '100% 50%' },
         },
-        fadeInDown: {
-          '0%': { opacity: '0', transform: 'translateY(-30px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        marquee: {
+          '0%':   { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
-        slideInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-30px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
+        floatSlow: {
+          '0%,100%': { transform: 'translateY(0) translateX(0)' },
+          '50%':     { transform: 'translateY(-24px) translateX(10px)' },
         },
-        slideInRight: {
-          '0%': { opacity: '0', transform: 'translateX(30px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px rgba(46,139,87,0.2), 0 0 20px rgba(46,139,87,0.1)' },
-          '100%': { boxShadow: '0 0 20px rgba(46,139,87,0.4), 0 0 60px rgba(46,139,87,0.2)' },
+        pulseRing: {
+          '0%':   { transform: 'scale(0.8)', opacity: '0.8' },
+          '100%': { transform: 'scale(1.6)', opacity: '0' },
         },
         shimmer: {
-          '0%': { backgroundPosition: '-200% 0' },
+          '0%':   { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
-        rotateSlow: {
-          '0%': { transform: 'rotate(0deg)' },
+        borderSpin: {
+          '0%':   { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
-        scalePulse: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.05)' },
+        blink: {
+          '0%,100%': { opacity: '1' },
+          '50%':     { opacity: '0' },
         },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
-        }
       },
-      backdropBlur: {
-        xs: '2px',
-      }
+      backgroundImage: {
+        'grid-ink':  "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
+        'grid-light': "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)",
+        'radial-brand': 'radial-gradient(1200px 600px at 50% -10%, rgba(99,102,241,0.18), transparent 60%)',
+      },
     },
   },
   plugins: [
