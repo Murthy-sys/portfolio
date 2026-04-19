@@ -11,12 +11,12 @@ const experiences = [
     location: 'Bangalore, India',
     duration: '01/2022 — Present',
     achievements: [
-      'Architected employee & manager modules of internal service portal using React.js and Redux',
-      'Designed modular Vue components and managed workflows with Vuex for DPSys',
-      'Built RAMP dashboards evaluating engine airworthiness with data-driven UI',
-      'Integrated REST APIs and drove UI performance through rigorous validation',
+      'Developed employee and manager modules of the internal service portal using React.js and Redux',
+      'Built modular Vue components and managed state with Vuex for the DPSys project',
+      'Worked on dashboards for the RAMP project',
+      'Integrated REST APIs and implemented form validations across applications',
     ],
-    technologies: ['React.js', 'Redux', 'Vue.js', 'Vuex', 'REST', 'TypeScript'],
+    technologies: ['React.js', 'Redux', 'Vue.js', 'Vuex', 'JavaScript', 'REST APIs'],
     isLatest: true,
   },
   {
@@ -26,11 +26,11 @@ const experiences = [
     location: 'Bangalore, India',
     duration: '07/2020 — 02/2022',
     achievements: [
-      'Shipped comprehensive management reports with advanced analytical tooling',
-      'Partnered with cross-functional teams to optimize operational workflows',
-      'Implemented data-driven automation to streamline recurring processes',
+      'Prepared management reports using analytical tools',
+      'Worked with cross-functional teams on operational workflows',
+      'Participated in requirement gathering and solution design sessions',
     ],
-    technologies: ['Analytics', 'SQL', 'Process Optimization'],
+    technologies: ['Analytics', 'Reporting'],
   },
   {
     id: 3,
@@ -39,11 +39,11 @@ const experiences = [
     location: 'Bangalore, India',
     duration: '08/2017 — 01/2020',
     achievements: [
-      'Collaborated across teams to improve operational KPIs',
-      'Analyzed requirements and delivered technical solutions for financial workflows',
-      'Established foundations in financial services and enterprise analysis',
+      'Collaborated with teams to improve operational processes',
+      'Analyzed business requirements and supported technical solutions',
+      'Gained foundational experience in the financial services domain',
     ],
-    technologies: ['Business Analysis', 'Documentation', 'Financial Services'],
+    technologies: ['Business Analysis', 'Financial Services'],
   },
 ];
 
@@ -65,10 +65,10 @@ const Experience = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
           darkMode={darkMode}
-          eyebrow="02 / CAREER"
-          title="A record of"
-          highlight="shipping at scale."
-          description="Nine years across enterprise finance, aviation compliance, and internal tooling — building things people use every day."
+          eyebrow="CAREER"
+          title="Work"
+          highlight="history."
+          description="Over 7 years across financial services and enterprise software."
         />
 
         <div ref={ref} className="relative">

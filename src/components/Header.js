@@ -85,9 +85,6 @@ const Header = ({ darkMode, toggleDarkMode }) => {
                       : active ? 'text-ink-900' : 'text-ink-500 hover:text-ink-900'
                   }`}
                 >
-                  <span className="font-mono text-[10px] mr-1 text-brand-400">
-                    0{i + 1}.
-                  </span>
                   {item.name}
                   {active && (
                     <motion.span
@@ -155,7 +152,6 @@ const Header = ({ darkMode, toggleDarkMode }) => {
                         : 'text-ink-700 hover:bg-ink-100'
                     }`}
                   >
-                    <span className="font-mono text-[10px] text-brand-400">0{i + 1}.</span>
                     {item.name}
                   </motion.button>
                 ))}

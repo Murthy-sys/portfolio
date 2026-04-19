@@ -51,10 +51,10 @@ const Contact = ({ darkMode }) => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
           darkMode={darkMode}
-          eyebrow="05 / CONTACT"
-          title="Let's build"
-          highlight="something lasting."
-          description="I'm open to roles, collaborations, and consulting engagements. Drop a note — I'll reply within a day."
+          eyebrow="CONTACT"
+          title="Get in"
+          highlight="touch."
+          description="Have a question or a project in mind? Send a message and I'll get back to you."
         />
 
         <div className="grid lg:grid-cols-12 gap-12">
@@ -112,14 +112,14 @@ const Contact = ({ darkMode }) => {
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="font-mono text-[10px] tracking-widest uppercase text-emerald-400">
-                  ACCEPTING NEW PROJECTS
+                  AVAILABLE FOR WORK
                 </span>
               </div>
               <p className={`text-sm leading-relaxed ${
                 darkMode ? 'text-ink-300' : 'text-ink-600'
               }`}>
-                I typically respond within 24 hours on business days. For urgent
-                engagements, calling is fastest.
+                I usually reply within a day. For anything urgent, a call is the fastest
+                way to reach me.
               </p>
             </div>
           </motion.div>
@@ -148,7 +148,7 @@ const Contact = ({ darkMode }) => {
                     Message received
                   </h4>
                   <p className={darkMode ? 'text-ink-400' : 'text-ink-500'}>
-                    Thanks for reaching out — I'll be in touch shortly.
+                    Thanks for reaching out. I'll get back to you soon.
                   </p>
                 </motion.div>
               ) : (

@@ -48,7 +48,7 @@ const Footer = ({ darkMode }) => {
               CONTACT
             </div>
             <p className={`text-sm mb-4 ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-              Open to new opportunities and interesting collaborations worldwide.
+              Available for new opportunities. Reach out anytime.
             </p>
             <a
               href="mailto:mmurthy7702@gmail.com"

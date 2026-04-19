@@ -61,7 +61,7 @@ const Hero = ({ darkMode }) => {
               className="eyebrow mb-6"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              AVAILABLE FOR WORK — 2026
+              OPEN TO NEW OPPORTUNITIES
             </motion.div>
 
             <h1 className="font-display font-semibold tracking-tightest leading-[0.95] text-5xl sm:text-7xl lg:text-[8rem]">
@@ -107,7 +107,7 @@ const Hero = ({ darkMode }) => {
             >
               <div className={`h-px flex-1 max-w-[80px] ${darkMode ? 'bg-ink-700' : 'bg-ink-300'}`} />
               <span className="font-mono text-xs sm:text-sm tracking-widest uppercase text-brand-400">
-                Senior Front-End Engineer
+                Front-End Developer
               </span>
               <div className={`h-px flex-1 max-w-[80px] ${darkMode ? 'bg-ink-700' : 'bg-ink-300'}`} />
             </motion.div>
@@ -120,12 +120,13 @@ const Hero = ({ darkMode }) => {
                 darkMode ? 'text-ink-300' : 'text-ink-600'
               }`}
             >
-              I architect high-performance web & mobile experiences with{' '}
+              Front-end developer with{' '}
+              <span className="text-brand-400 font-medium">7+ years</span> of experience building
+              web and mobile applications using{' '}
               <span className={darkMode ? 'text-white font-medium' : 'text-ink-900 font-medium'}>
                 React, Vue, and JavaScript
               </span>
-              . <span className="text-brand-400 font-medium">7+ years</span> crafting interfaces
-              that scale across enterprise finance, aviation, and consumer platforms.
+              .
             </motion.p>
 
             <motion.div

@@ -13,9 +13,8 @@ const personalInfo = [
 ];
 
 const stats = [
-  { number: '7+', label: 'Years Experience' },
+  { number: '7+',  label: 'Years Experience' },
   { number: '6+',  label: 'Projects Shipped' },
-  { number: '100%', label: 'Client Retention' },
 ];
 
 const About = ({ darkMode }) => {
@@ -27,10 +26,10 @@ const About = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
           darkMode={darkMode}
-          eyebrow="01 / ABOUT"
-          title="Building interfaces with"
-          highlight="precision & craft."
-          description="I design and engineer user interfaces at the intersection of usability and performance, translating complex enterprise workflows into intuitive experiences."
+          eyebrow="ABOUT"
+          title="A bit"
+          highlight="about me."
+          description="Front-end developer focused on building reliable web and mobile applications."
         />
 
         <div className="grid lg:grid-cols-12 gap-12">
@@ -43,18 +42,17 @@ const About = ({ darkMode }) => {
             className="lg:col-span-7 space-y-6"
           >
             <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-              I'm a front-end engineer with nearly a decade of experience shaping web and mobile
-              products across financial services, aviation compliance, and consumer travel. I care
-              deeply about interaction detail, accessibility, and the quiet engineering that makes
-              complex UIs feel effortless.
+              I'm a front-end developer with over 7 years of experience building web and mobile
+              applications. I've worked across financial services and enterprise software,
+              primarily with React, Vue, and JavaScript.
             </p>
             <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-              Currently leading UI initiatives at{' '}
+              Currently a Technical Lead at{' '}
               <span className={darkMode ? 'text-white font-medium' : 'text-ink-900 font-medium'}>
                 Wissen Infotech
-              </span>{' '}
-              — designing modular component systems in Vue and architecting dashboards in React
-              that teams across time zones depend on daily.
+              </span>
+              , working on Vue and React applications for internal portals and enterprise
+              dashboards.
             </p>
 
             {/* Contact grid */}
@@ -148,10 +146,10 @@ const About = ({ darkMode }) => {
                 darkMode ? 'text-ink-300' : 'text-ink-600'
               }`}>
                 {[
-                  'Built interactive employee & manager modules with React + Redux',
-                  'Architected modular Vue components and Vuex workflows for DPSys',
-                  'Designed RAMP dashboards evaluating aviation airworthiness',
-                  'Integrated REST APIs, elevating UI performance and validation coverage',
+                  'Built employee and manager modules for internal portals using React and Redux',
+                  'Developed modular Vue components and managed state with Vuex',
+                  'Worked on dashboards for the RAMP project',
+                  'Integrated REST APIs and added form validations across applications',
                 ].map((item, i) => (
                   <motion.li
                     key={i}
@@ -161,9 +159,7 @@ const About = ({ darkMode }) => {
                     transition={{ delay: 0.5 + i * 0.08 }}
                     className="flex gap-3"
                   >
-                    <span className="font-mono text-brand-400 text-xs mt-0.5">
-                      0{i + 1}
-                    </span>
+                    <span className="text-brand-400 mt-1.5 shrink-0">›</span>
                     <span>{item}</span>
                   </motion.li>
                 ))}

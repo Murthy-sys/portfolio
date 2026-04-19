@@ -38,10 +38,10 @@ const skillCategories = [
 ];
 
 const competencies = [
-  { icon: Globe,      title: 'Web Platform',      desc: 'Responsive, performant' },
-  { icon: Smartphone, title: 'Mobile Apps',       desc: 'React Native, iOS/Android' },
-  { icon: GitBranch,  title: 'Version Control',   desc: 'Trunk-based, PR-first' },
-  { icon: Code,       title: 'Engineering',       desc: 'Readable, testable code' },
+  { icon: Globe,      title: 'Web Development',   desc: 'Responsive web apps' },
+  { icon: Smartphone, title: 'Mobile Apps',       desc: 'React Native' },
+  { icon: GitBranch,  title: 'Version Control',   desc: 'Git and GitHub' },
+  { icon: Code,       title: 'Agile',             desc: 'Scrum ceremonies' },
 ];
 
 const Skills = ({ darkMode }) => {
@@ -53,10 +53,10 @@ const Skills = ({ darkMode }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
           darkMode={darkMode}
-          eyebrow="03 / CAPABILITIES"
-          title="A toolkit honed across"
-          highlight="domains & teams."
-          description="A deep bench in modern front-end engineering, paired with the process and tooling fluency of a seasoned lead."
+          eyebrow="SKILLS"
+          title="Tech"
+          highlight="stack."
+          description="Tools and technologies I use to build web and mobile applications."
         />
 
         <div className="grid lg:grid-cols-3 gap-6">
