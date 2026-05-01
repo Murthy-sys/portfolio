@@ -82,7 +82,7 @@ const Hero = ({ darkMode }) => {
                 </span>
               </span>
               <span className="block overflow-hidden">
-                <span className="inline-block text-shimmer">
+                <span className="inline-block bg-gradient-to-r from-brand-400 via-brand-300 to-glow-400 bg-clip-text text-transparent">
                   {lastName.split('').map((c, i) => (
                     <motion.span
                       key={i}

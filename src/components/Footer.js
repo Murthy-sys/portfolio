@@ -25,23 +25,7 @@ const Footer = ({ darkMode }) => {
     }`}>
       <div className="absolute inset-0 bg-radial-brand opacity-60 pointer-events-none" />
 
-      {/* Oversized name watermark */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9 }}
-          className={`font-display font-semibold tracking-tightest text-[18vw] sm:text-[16vw] lg:text-[14vw] leading-[0.9] pb-4 ${
-            darkMode ? 'text-white' : 'text-ink-900'
-          }`}
-          style={{ letterSpacing: '-0.04em' }}
-        >
-          OBULAMURTHY
-        </motion.div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 border-t border-ink-800/40">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
         <div className="grid md:grid-cols-3 gap-10">
           <div>
             <div className="font-mono text-[10px] tracking-widest uppercase text-ink-400 mb-3">

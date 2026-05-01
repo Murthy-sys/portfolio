@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Layout, Database, Wrench, Globe, Smartphone, GitBranch, Code } from 'lucide-react';
 import SectionHeading from './SectionHeading';
+import FloatingBubbles from './FloatingBubbles';
+
+const techBubbles = [
+  { label: 'React',         color: '#61dafb', size: 'lg' },
+  { label: 'Vue.js',        color: '#41b883', size: 'lg' },
+  { label: 'JavaScript',    color: '#f7df1e', size: 'lg' },
+  { label: 'React Native',  color: '#61dafb', size: 'md' },
+  { label: 'Redux',         color: '#764abc', size: 'md' },
+  { label: 'Vuex',          color: '#41b883', size: 'sm' },
+  { label: 'Pinia',         color: '#ffd859', size: 'sm' },
+  { label: 'Tailwind',      color: '#38bdf8', size: 'md' },
+  { label: 'Node.js',       color: '#3c873a', size: 'md' },
+  { label: 'REST APIs',     color: '#6366f1', size: 'sm' },
+  { label: 'HTML5',         color: '#e34f26', size: 'sm' },
+  { label: 'CSS3',          color: '#1572b6', size: 'sm' },
+  { label: 'Git',           color: '#f05033', size: 'sm' },
+  { label: 'Vite',          color: '#a855f7', size: 'sm' },
+  { label: 'Jest',          color: '#c63d14', size: 'sm' },
+];
 
 const skillCategories = [
   {
@@ -155,32 +174,16 @@ const Skills = ({ darkMode }) => {
           </div>
         </motion.div>
 
-        {/* Marquee of tech */}
-        <div className={`relative mt-12 overflow-hidden py-4 border-y ${
-          darkMode ? 'border-ink-800' : 'border-ink-200'
-        }`}>
-          <div
-            className="marquee-track animate-marquee whitespace-nowrap"
-            style={{ animationDuration: '38s' }}
-          >
-            {[...Array(2)].map((_, dup) => (
-              <React.Fragment key={dup}>
-                {[
-                  'REACT', 'VUE.JS', 'TYPESCRIPT', 'REDUX', 'VUEX', 'PINIA', 'REACT NATIVE',
-                  'TAILWIND', 'NODE.JS', 'REST APIs', 'JEST',
-                ].map((t, i) => (
-                  <span
-                    key={`${dup}-${i}`}
-                    className={`font-display font-semibold text-2xl sm:text-3xl tracking-tightest ${
-                      darkMode ? 'text-ink-300' : 'text-ink-700'
-                    }`}
-                  >
-                    {t} <span className="text-brand-400 mx-4">•</span>
-                  </span>
-                ))}
-              </React.Fragment>
-            ))}
+        {/* Floating tech bubbles */}
+        <div className="relative mt-16">
+          <div className="text-center mb-6">
+            <span className={`font-mono text-[10px] tracking-widest uppercase ${
+              darkMode ? 'text-ink-500' : 'text-ink-400'
+            }`}>
+              The stack, in motion
+            </span>
           </div>
+          <FloatingBubbles items={techBubbles} darkMode={darkMode} />
         </div>
       </div>
     </section>
