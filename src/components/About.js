@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, MapPin, Phone, Mail, Calendar, GraduationCap } from 'lucide-react';
 import SectionHeading from './SectionHeading';
+import TiltCard from './TiltCard';
+import profileImage from '../IMG_5330.jpg';
 
 const personalInfo = [
   { icon: User,           label: 'Name',       value: 'Malisetti Obulamurthy' },
@@ -32,31 +34,128 @@ const About = ({ darkMode }) => {
           description="Front-end developer focused on building reliable web and mobile applications."
         />
 
-        <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left: narrative */}
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14">
+          {/* Left: portrait */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7 space-y-6"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5"
           >
-            <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-              I'm a front-end developer with over 7 years of experience building web and mobile
-              applications. I've worked across financial services and enterprise software,
-              primarily with React, Vue, and JavaScript.
-            </p>
-            <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-              Currently a Technical Lead at{' '}
-              <span className={darkMode ? 'text-white font-medium' : 'text-ink-900 font-medium'}>
-                Wissen Infotech
-              </span>
-              , working on Vue and React applications for internal portals and enterprise
-              dashboards.
-            </p>
+            <div className="lg:sticky lg:top-28">
+              <TiltCard intensity={4}>
+                <div
+                  className={`relative aspect-[4/5] rounded-3xl overflow-hidden gradient-border ${
+                    darkMode ? 'bg-ink-900' : 'bg-white'
+                  }`}
+                  style={{
+                    boxShadow:
+                      '0 30px 80px -20px rgba(99,102,241,0.25), 0 10px 30px -10px rgba(0,0,0,0.25)',
+                    transformStyle: 'preserve-3d',
+                  }}
+                >
+                  {/* Soft brand-tinted backdrop visible behind the contained image */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: darkMode
+                        ? 'radial-gradient(circle at 50% 30%, rgba(99,102,241,0.25), rgba(14,14,19,1) 70%)'
+                        : 'radial-gradient(circle at 50% 30%, rgba(99,102,241,0.12), rgba(244,244,245,1) 70%)',
+                    }}
+                  />
+
+                  <img
+                    src={profileImage}
+                    alt="Malisetti Obulamurthy"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-contain"
+                    style={{ transform: 'translateZ(0)' }}
+                  />
+
+                  {/* Soft gradient bottom for caption legibility */}
+                  <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+
+                  {/* Top-right available badge */}
+                  <div
+                    className="absolute top-4 right-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono tracking-widest uppercase backdrop-blur-md bg-black/40 text-white border border-white/10"
+                    style={{ transform: 'translateZ(60px)' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    AVAILABLE
+                  </div>
+
+                  {/* Bottom caption */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 p-5 text-white"
+                    style={{ transform: 'translateZ(40px)' }}
+                  >
+                    <p className="font-display font-semibold text-lg leading-tight">
+                      Malisetti Obulamurthy
+                    </p>
+                    <p className="font-mono text-[10px] tracking-widest uppercase text-white/70 mt-1">
+                      Bangalore · India
+                    </p>
+                  </div>
+                </div>
+              </TiltCard>
+            </div>
+          </motion.div>
+
+          {/* Right: narrative + contact + stats + highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-7 space-y-8"
+          >
+            <div className="space-y-5">
+              <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
+                I'm a front-end developer with over 7 years of experience building web and mobile
+                applications. I've worked across financial services and enterprise software,
+                primarily with React, Vue, and JavaScript.
+              </p>
+              <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
+                Currently a Technical Lead at{' '}
+                <span className={darkMode ? 'text-white font-medium' : 'text-ink-900 font-medium'}>
+                  Wissen Infotech
+                </span>
+                , working on Vue and React applications for internal portals and enterprise
+                dashboards.
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-4">
+              {stats.map((s, i) => (
+                <motion.div
+                  key={s.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + i * 0.08 }}
+                  whileHover={{ y: -4 }}
+                  className={`relative p-6 rounded-xl overflow-hidden spotlight border ${
+                    darkMode
+                      ? 'bg-ink-900/60 border-ink-800'
+                      : 'bg-white border-ink-200'
+                  }`}
+                >
+                  <div className="font-display font-semibold text-4xl sm:text-5xl tracking-tightest bg-gradient-to-br from-brand-300 to-glow-400 bg-clip-text text-transparent">
+                    {s.number}
+                  </div>
+                  <div className={`mt-2 font-mono text-[10px] tracking-widest uppercase ${
+                    darkMode ? 'text-ink-400' : 'text-ink-500'
+                  }`}>
+                    {s.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
             {/* Contact grid */}
-            <div className="grid sm:grid-cols-2 gap-3 pt-6">
+            <div className="grid sm:grid-cols-2 gap-3">
               {personalInfo.map((info, i) => (
                 <motion.div
                   key={info.label}
@@ -86,42 +185,6 @@ const About = ({ darkMode }) => {
                     }`}>
                       {info.value}
                     </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right: stats + highlights */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 space-y-6"
-          >
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 + i * 0.08 }}
-                  whileHover={{ y: -4 }}
-                  className={`relative p-6 rounded-xl overflow-hidden spotlight border ${
-                    darkMode
-                      ? 'bg-ink-900/60 border-ink-800'
-                      : 'bg-white border-ink-200'
-                  }`}
-                >
-                  <div className="font-display font-semibold text-4xl sm:text-5xl tracking-tightest bg-gradient-to-br from-brand-300 to-glow-400 bg-clip-text text-transparent">
-                    {s.number}
-                  </div>
-                  <div className={`mt-2 font-mono text-[10px] tracking-widest uppercase ${
-                    darkMode ? 'text-ink-400' : 'text-ink-500'
-                  }`}>
-                    {s.label}
                   </div>
                 </motion.div>
               ))}
