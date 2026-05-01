@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
 const Hero = ({ darkMode }) => {
@@ -200,7 +200,6 @@ const Hero = ({ darkMode }) => {
               darkMode ? 'bg-ink-900/70' : 'bg-white'
             }`}>
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-4 h-4 text-glow-500" />
                 <span className="font-mono text-[10px] tracking-widest uppercase text-ink-400">
                   At a glance
                 </span>
