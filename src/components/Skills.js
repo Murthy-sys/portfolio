@@ -180,7 +180,7 @@ const Skills = ({ darkMode }) => {
             <span className={`font-mono text-[10px] tracking-widest uppercase ${
               darkMode ? 'text-ink-500' : 'text-ink-400'
             }`}>
-              The stack, in motion
+              The stack
             </span>
           </div>
           <FloatingBubbles items={techBubbles} darkMode={darkMode} />

@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * Floating tech bubbles. Positions are deterministic (hash-based) so layout
- * is stable between renders, while animations have varied phase + duration
- * to feel organic and "airborne".
+ * Tech bubbles laid out on a responsive grid (so they never overlap),
+ * but each bubble drifts a few pixels independently to keep the
+ * "floating in air" feel.
  */
 const seededRandom = (seed) => {
   let h = 2166136261;
@@ -21,100 +21,89 @@ const seededRandom = (seed) => {
   };
 };
 
+const sizeMap = {
+  sm: { padX: 14, padY: 7,  font: 12 },
+  md: { padX: 18, padY: 9,  font: 14 },
+  lg: { padX: 22, padY: 11, font: 16 },
+};
+
 const FloatingBubbles = ({ items, darkMode }) => {
-  const placed = useMemo(() => {
-    return items.map((item, i) => {
-      const rand = seededRandom(item.label + i);
-      const size = item.size || 'md'; // sm | md | lg
-      const sizeMap = {
-        sm: { padX: 12, padY: 6,  font: 11 },
-        md: { padX: 16, padY: 8,  font: 13 },
-        lg: { padX: 22, padY: 10, font: 16 },
-      };
-      const { padX, padY, font } = sizeMap[size];
-
-      // Distribute across a 6-column virtual grid with jitter
-      const cols = 6;
-      const rows = 3;
-      const col = i % cols;
-      const row = Math.floor(i / cols) % rows;
-      const baseX = (col / (cols - 1)) * 100;
-      const baseY = (row / (rows - 1)) * 100;
-
-      const x = Math.max(2, Math.min(98, baseX + (rand() - 0.5) * 14));
-      const y = Math.max(5, Math.min(95, baseY + (rand() - 0.5) * 22));
-
-      const float = {
-        duration: 5 + rand() * 5,
-        delay: rand() * 3,
-        yAmp: 12 + rand() * 16,
-        xAmp: 6 + rand() * 12,
-      };
-
-      return { ...item, x, y, padX, padY, font, float };
-    });
-  }, [items]);
+  const enriched = useMemo(
+    () =>
+      items.map((item, i) => {
+        const rand = seededRandom(item.label + i);
+        const { padX, padY, font } = sizeMap[item.size || 'md'];
+        const float = {
+          duration: 4 + rand() * 4,        // 4–8s
+          delay: rand() * 2.5,
+          yAmp: 6 + rand() * 6,            // 6–12px
+          xAmp: 3 + rand() * 5,            // 3–8px
+          rotAmp: (rand() - 0.5) * 4,      // ±2deg
+        };
+        return { ...item, padX, padY, font, float };
+      }),
+    [items]
+  );
 
   return (
-    <div className="relative w-full h-[340px] sm:h-[400px] overflow-hidden">
+    <div className="relative w-full">
       {/* Soft ambient backdrops */}
       <div
-        className="absolute -top-10 left-1/4 w-72 h-72 rounded-full blur-3xl opacity-30"
+        className="absolute -top-8 left-1/4 w-72 h-72 rounded-full blur-3xl opacity-30 pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.4), transparent 70%)' }}
       />
       <div
-        className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-25"
+        className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-25 pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.4), transparent 70%)' }}
       />
 
-      {placed.map((b, i) => (
-        <motion.div
-          key={b.label}
-          initial={{ opacity: 0, scale: 0.6 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            opacity: { delay: i * 0.04, duration: 0.6 },
-            scale:   { delay: i * 0.04, duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-          }}
-          style={{
-            left: `${b.x}%`,
-            top:  `${b.y}%`,
-            transform: 'translate(-50%, -50%)',
-          }}
-          className="absolute will-change-transform"
-        >
+      <div className="relative grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-3 gap-y-5 sm:gap-y-6 place-items-center py-10 sm:py-14">
+        {enriched.map((b, i) => (
           <motion.div
-            animate={{
-              y: [0, -b.float.yAmp, 0, b.float.yAmp * 0.6, 0],
-              x: [0, b.float.xAmp, 0, -b.float.xAmp * 0.7, 0],
-            }}
+            key={b.label}
+            initial={{ opacity: 0, scale: 0.6, y: 8 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{
-              duration: b.float.duration,
-              delay: b.float.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
+              delay: i * 0.04,
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
             }}
-            whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
-            data-cursor="hover"
-            className={`inline-flex items-center gap-2 rounded-full font-mono font-medium tracking-wide whitespace-nowrap backdrop-blur-md cursor-default ${
-              darkMode
-                ? 'bg-ink-900/60 border border-ink-700/60 text-ink-100 shadow-lg shadow-brand-900/20'
-                : 'bg-white/80 border border-ink-200 text-ink-800 shadow-lg shadow-brand-200/30'
-            }`}
-            style={{
-              padding: `${b.padY}px ${b.padX}px`,
-              fontSize: `${b.font}px`,
-            }}
+            className="will-change-transform"
           >
-            <span
-              className="inline-block w-1.5 h-1.5 rounded-full"
-              style={{ background: b.color }}
-            />
-            {b.label}
+            <motion.div
+              animate={{
+                y: [0, -b.float.yAmp, 0, b.float.yAmp * 0.7, 0],
+                x: [0, b.float.xAmp, 0, -b.float.xAmp, 0],
+                rotate: [0, b.float.rotAmp, 0, -b.float.rotAmp, 0],
+              }}
+              transition={{
+                duration: b.float.duration,
+                delay: b.float.delay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+              whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+              data-cursor="hover"
+              className={`inline-flex items-center gap-2 rounded-full font-mono font-medium tracking-wide whitespace-nowrap backdrop-blur-md cursor-default ${
+                darkMode
+                  ? 'bg-ink-900/60 border border-ink-700/60 text-ink-100 shadow-lg shadow-brand-900/20'
+                  : 'bg-white/80 border border-ink-200 text-ink-800 shadow-lg shadow-brand-200/30'
+              }`}
+              style={{
+                padding: `${b.padY}px ${b.padX}px`,
+                fontSize: `${b.font}px`,
+              }}
+            >
+              <span
+                className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+                style={{ background: b.color }}
+              />
+              {b.label}
+            </motion.div>
           </motion.div>
-        </motion.div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
