@@ -10,13 +10,13 @@ const personalInfo = [
   { icon: MapPin,         label: 'Location',   value: 'Anantapur, India' },
   { icon: Phone,          label: 'Phone',      value: '+91 7702327702' },
   { icon: Mail,           label: 'Email',      value: 'mmurthy7702@gmail.com' },
-  { icon: Calendar,       label: 'Experience', value: '8.7+ Years' },
+  { icon: Calendar,       label: 'Experience', value: '8+ Years' },
   { icon: GraduationCap,  label: 'Degree',     value: 'B.Tech, ECE' },
 ];
 
 const stats = [
-  { number: '7+',  label: 'Years Experience' },
-  { number: '6+',  label: 'Projects Shipped' },
+  { number: '8+',  label: 'Years Experience' },
+  { number: '5+',  label: 'Projects Shipped' },
 ];
 
 const About = ({ darkMode }) => {
@@ -112,7 +112,7 @@ const About = ({ darkMode }) => {
           >
             <div className="space-y-5">
               <p className={`text-lg leading-relaxed ${darkMode ? 'text-ink-300' : 'text-ink-600'}`}>
-                I'm a front-end developer with over 7 years of experience building web and mobile
+                I'm a front-end developer with over 8 years of experience building web and mobile
                 applications. I've worked across financial services and enterprise software,
                 primarily with React, Vue, and JavaScript.
               </p>

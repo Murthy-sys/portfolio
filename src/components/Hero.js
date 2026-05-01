@@ -121,7 +121,7 @@ const Hero = ({ darkMode }) => {
               }`}
             >
               Front-end developer with{' '}
-              <span className="text-brand-400 font-medium">7+ years</span> of experience building
+              <span className="text-brand-400 font-medium">8+ years</span> of experience building
               web and mobile applications using{' '}
               <span className={darkMode ? 'text-white font-medium' : 'text-ink-900 font-medium'}>
                 React, Vue, and JavaScript
@@ -207,7 +207,7 @@ const Hero = ({ darkMode }) => {
               </div>
               <dl className="space-y-5">
                 {[
-                  { k: 'Experience', v: '7+ yrs' },
+                  { k: 'Experience', v: '8+ yrs' },
                   { k: 'Stack',      v: 'React · Vue · JS' },
                   { k: 'Location',   v: 'India (Remote)' },
                   { k: 'Focus',      v: 'Enterprise UI' },

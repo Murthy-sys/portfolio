@@ -68,7 +68,7 @@ const Experience = ({ darkMode }) => {
           eyebrow="CAREER"
           title="Work"
           highlight="history."
-          description="Over 7 years across financial services and enterprise software."
+          description="Over 8 years across financial services and enterprise software."
         />
 
         <div ref={ref} className="relative">
