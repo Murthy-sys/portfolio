@@ -11,9 +11,22 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
+import ParticleUniverse from './components/ParticleUniverse';
+
+// Resolve the saved/preferred theme synchronously so the very first paint
+// (preloader included) matches — no dark flash for light-theme visitors.
+const resolveInitialTheme = () => {
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+  } catch (e) {
+    /* localStorage unavailable */
+  }
+  return true; // default to dark
+};
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(resolveInitialTheme);
   const [loading, setLoading] = useState(true);
 
   const { scrollYProgress } = useScroll();
@@ -24,14 +37,11 @@ function App() {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = saved ? saved === 'dark' : prefersDark || true;
-    setDarkMode(isDark);
-    applyTheme(isDark);
+    applyTheme(darkMode);
 
     const t = setTimeout(() => setLoading(false), 1400);
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const applyTheme = (isDark) => {
@@ -54,18 +64,26 @@ function App() {
   return (
     <>
       <CustomCursor />
+
+      {/* Immersive WebGL data-network universe (both themes) */}
+      <ParticleUniverse darkMode={darkMode} />
+      {/* Scrim: sits above the canvas, below content -> keeps text legible */}
+      <div className={darkMode ? 'universe-dim' : 'universe-dim universe-dim--light'} />
+      <div className={darkMode ? 'universe-vignette' : 'universe-vignette universe-vignette--light'} />
+      {darkMode && <div className="universe-grain" />}
+
       <AnimatePresence mode="wait">
-        {loading && <Preloader key="preloader" />}
+        {loading && <Preloader key="preloader" darkMode={darkMode} />}
       </AnimatePresence>
 
       {/* Scroll progress indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60] bg-gradient-to-r from-brand-500 via-brand-400 to-glow-500"
+        className="fixed top-0 left-0 right-0 h-[2px] origin-left z-[60] bg-gradient-to-r from-neon-cyan via-brand-400 to-neon-pink shadow-neon-cyan"
         style={{ scaleX }}
       />
 
       <div className={`relative min-h-screen transition-colors duration-500 ${
-        darkMode ? 'bg-ink-950 text-ink-100' : 'bg-[#fafafa] text-ink-900'
+        darkMode ? 'text-ink-100' : 'text-ink-900'
       }`}>
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 

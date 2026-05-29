@@ -67,7 +67,7 @@ const Skills = ({ darkMode }) => {
   return (
     <section
       id="skills"
-      className={`relative py-28 sm:py-36 ${darkMode ? 'bg-ink-950' : 'bg-[#fafafa]'}`}
+      className="relative py-28 sm:py-36 bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
@@ -86,9 +86,7 @@ const Skills = ({ darkMode }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className={`spotlight relative p-7 rounded-2xl border ${
-                darkMode ? 'bg-ink-900/60 border-ink-800' : 'bg-white border-ink-200'
-              }`}
+              className="spotlight relative p-7 rounded-2xl holo-card"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className={`p-2.5 rounded-lg ${
@@ -141,8 +139,8 @@ const Skills = ({ darkMode }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className={`relative mt-12 rounded-3xl p-8 sm:p-10 overflow-hidden ${
-            darkMode ? 'bg-ink-900 border border-ink-800' : 'bg-white border border-ink-200'
+          className={`relative mt-12 rounded-3xl p-8 sm:p-10 overflow-hidden holo-card ${
+            darkMode ? 'scanlines' : ''
           }`}
         >
           <div className="absolute inset-0 bg-radial-brand opacity-80 pointer-events-none" />

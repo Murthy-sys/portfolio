@@ -46,6 +46,19 @@ module.exports = {
           800: '#8f440d',
           900: '#75380e',
         },
+        // Holographic neon accents for the sci-fi layer
+        neon: {
+          cyan:  '#22d3ee',
+          blue:  '#38bdf8',
+          violet:'#a855f7',
+          pink:  '#e879f9',
+          mint:  '#34d399',
+        },
+      },
+      boxShadow: {
+        'neon-cyan':   '0 0 20px rgba(34,211,238,0.45), 0 0 4px rgba(34,211,238,0.7)',
+        'neon-violet': '0 0 24px rgba(168,85,247,0.45), 0 0 6px rgba(168,85,247,0.6)',
+        'holo':        '0 8px 40px -8px rgba(99,102,241,0.45), 0 0 0 1px rgba(255,255,255,0.06) inset',
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui'],
@@ -63,8 +76,38 @@ module.exports = {
         'shimmer': 'shimmer 3s linear infinite',
         'border-spin': 'borderSpin 6s linear infinite',
         'blink': 'blink 1s steps(2) infinite',
+        'aurora': 'aurora 18s ease infinite',
+        'hologram': 'hologram 4s ease-in-out infinite',
+        'scanline': 'scanline 6s linear infinite',
+        'float-y': 'floatY 7s ease-in-out infinite',
+        'orbit': 'orbit 16s linear infinite',
+        'flicker': 'flicker 5s linear infinite',
       },
       keyframes: {
+        aurora: {
+          '0%,100%': { backgroundPosition: '0% 50%' },
+          '50%':     { backgroundPosition: '100% 50%' },
+        },
+        hologram: {
+          '0%,100%': { opacity: '0.85', filter: 'hue-rotate(0deg)' },
+          '50%':     { opacity: '1',    filter: 'hue-rotate(18deg)' },
+        },
+        scanline: {
+          '0%':   { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+        floatY: {
+          '0%,100%': { transform: 'translateY(0)' },
+          '50%':     { transform: 'translateY(-14px)' },
+        },
+        orbit: {
+          '0%':   { transform: 'rotate(0deg) translateX(var(--orbit-r,120px)) rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg) translateX(var(--orbit-r,120px)) rotate(-360deg)' },
+        },
+        flicker: {
+          '0%,19%,21%,55%,57%,100%': { opacity: '1' },
+          '20%,56%': { opacity: '0.7' },
+        },
         gradientShift: {
           '0%,100%': { backgroundPosition: '0% 50%' },
           '50%':     { backgroundPosition: '100% 50%' },
@@ -98,6 +141,8 @@ module.exports = {
         'grid-ink':  "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
         'grid-light': "linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px)",
         'radial-brand': 'radial-gradient(1200px 600px at 50% -10%, rgba(99,102,241,0.18), transparent 60%)',
+        'aurora': 'linear-gradient(120deg, rgba(99,102,241,0.25), rgba(34,211,238,0.2) 30%, rgba(232,121,249,0.2) 60%, rgba(99,102,241,0.25))',
+        'holo-sheen': 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.08) 45%, rgba(34,211,238,0.12) 50%, rgba(255,255,255,0.08) 55%, transparent 70%)',
       },
     },
   },

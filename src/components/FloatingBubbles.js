@@ -83,11 +83,16 @@ const FloatingBubbles = ({ items, darkMode }) => {
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
-              whileHover={{ scale: 1.12, transition: { duration: 0.2 } }}
+              whileHover={{
+                scale: 1.14,
+                boxShadow: darkMode ? `0 0 22px ${b.color}66, 0 0 4px ${b.color}` : undefined,
+                borderColor: darkMode ? `${b.color}99` : undefined,
+                transition: { duration: 0.2 },
+              }}
               data-cursor="hover"
               className={`inline-flex items-center gap-2 rounded-full font-mono font-medium tracking-wide whitespace-nowrap backdrop-blur-md cursor-default ${
                 darkMode
-                  ? 'bg-ink-900/60 border border-ink-700/60 text-ink-100 shadow-lg shadow-brand-900/20'
+                  ? 'bg-ink-900/50 border border-white/10 text-ink-100 shadow-lg shadow-brand-900/20'
                   : 'bg-white/80 border border-ink-200 text-ink-800 shadow-lg shadow-brand-200/30'
               }`}
               style={{
@@ -97,7 +102,7 @@ const FloatingBubbles = ({ items, darkMode }) => {
             >
               <span
                 className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
-                style={{ background: b.color }}
+                style={{ background: b.color, boxShadow: darkMode ? `0 0 8px ${b.color}` : 'none' }}
               />
               {b.label}
             </motion.div>

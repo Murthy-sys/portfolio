@@ -21,7 +21,7 @@ const Footer = ({ darkMode }) => {
 
   return (
     <footer className={`relative overflow-hidden border-t ${
-      darkMode ? 'bg-ink-950 border-ink-800' : 'bg-[#fafafa] border-ink-200'
+      darkMode ? 'bg-transparent border-white/10' : 'bg-transparent border-ink-300/50'
     }`}>
       <div className="absolute inset-0 bg-radial-brand opacity-60 pointer-events-none" />
 

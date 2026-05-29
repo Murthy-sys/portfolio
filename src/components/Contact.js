@@ -8,21 +8,57 @@ const Contact = ({ darkMode }) => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  // Web3Forms access key — generated at https://web3forms.com using the
+  // inbox address (mmurthy7702@gmail.com); emails are delivered there.
+  // Public by design (it only routes to your inbox), but kept in an env var.
+  const ACCESS_KEY =
+    process.env.REACT_APP_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_ACCESS_KEY';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg('');
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const subject = formData.subject?.trim()
+      ? formData.subject.trim()
+      : `Portfolio enquiry from ${formData.name || 'a visitor'}`;
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject,
+          from_name: formData.name || 'Portfolio visitor',
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          // Honeypot is left empty by real users; bots fill it.
+          botcheck: '',
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setIsSubmitted(false), 6000);
+      } else {
+        setErrorMsg(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setErrorMsg('Network error — please check your connection and try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+    }
   };
 
   const contactInfo = [
@@ -31,20 +67,20 @@ const Contact = ({ darkMode }) => {
     { icon: MapPin, label: 'LOCATION', value: 'Anantapur, India',      href: '#' },
   ];
 
-  const inputCls = `w-full bg-transparent border-b pb-3 pt-5 text-sm font-medium outline-none transition-colors placeholder:transition-colors ${
+  const inputCls = `w-full rounded-lg px-3.5 py-3 text-sm font-medium outline-none transition-colors placeholder:transition-colors ${
     darkMode
-      ? 'text-white border-ink-800 focus:border-brand-400 placeholder:text-ink-600'
-      : 'text-ink-900 border-ink-200 focus:border-brand-500 placeholder:text-ink-400'
+      ? 'text-white bg-white/[0.04] border border-white/12 focus:border-neon-cyan/70 focus:bg-white/[0.07] placeholder:text-ink-400'
+      : 'text-ink-900 bg-white border border-ink-200 focus:border-brand-500 placeholder:text-ink-400'
   }`;
 
-  const labelCls = `block font-mono text-[10px] tracking-widest uppercase mb-1 ${
-    darkMode ? 'text-ink-500' : 'text-ink-400'
+  const labelCls = `block font-mono text-[10px] tracking-widest uppercase mb-1.5 ${
+    darkMode ? 'text-ink-300' : 'text-ink-500'
   }`;
 
   return (
     <section
       id="contact"
-      className={`relative py-28 sm:py-36 ${darkMode ? 'bg-ink-950' : 'bg-[#fafafa]'}`}
+      className="relative py-28 sm:py-36 bg-transparent"
     >
       <div className="absolute inset-0 bg-radial-brand opacity-70 pointer-events-none" />
 
@@ -76,11 +112,7 @@ const Contact = ({ darkMode }) => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
                   whileHover={{ x: 6 }}
-                  className={`spotlight group flex items-center gap-4 p-5 rounded-xl border transition-colors ${
-                    darkMode
-                      ? 'bg-ink-900/50 border-ink-800 hover:border-brand-500/50'
-                      : 'bg-white border-ink-200 hover:border-brand-500/50'
-                  }`}
+                  className="spotlight group flex items-center gap-4 p-5 rounded-xl transition-colors holo-card"
                 >
                   <div className={`p-2.5 rounded-md ${
                     darkMode ? 'bg-ink-800 text-brand-400' : 'bg-brand-50 text-brand-600'
@@ -106,9 +138,7 @@ const Contact = ({ darkMode }) => {
               ))}
             </div>
 
-            <div className={`p-6 rounded-2xl border ${
-              darkMode ? 'bg-ink-900 border-ink-800' : 'bg-white border-ink-200'
-            }`}>
+            <div className="p-6 rounded-2xl holo-card">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="font-mono text-[10px] tracking-widest uppercase text-emerald-400">
@@ -132,9 +162,7 @@ const Contact = ({ darkMode }) => {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="lg:col-span-7"
           >
-            <div className={`relative p-8 sm:p-10 rounded-3xl border overflow-hidden ${
-              darkMode ? 'bg-ink-900/70 border-ink-800' : 'bg-white border-ink-200'
-            }`}>
+            <div className="relative p-8 sm:p-10 rounded-3xl overflow-hidden holo-card holo-border">
               {isSubmitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -145,14 +173,25 @@ const Contact = ({ darkMode }) => {
                   <h4 className={`font-display font-semibold text-xl mb-2 ${
                     darkMode ? 'text-white' : 'text-ink-900'
                   }`}>
-                    Message received
+                    Message sent
                   </h4>
-                  <p className={darkMode ? 'text-ink-400' : 'text-ink-500'}>
-                    Thanks for reaching out. I'll get back to you soon.
+                  <p className={darkMode ? 'text-ink-300' : 'text-ink-500'}>
+                    Thanks for reaching out — it landed in{' '}
+                    <span className="text-brand-400 font-medium">mmurthy7702@gmail.com</span>.
+                    I'll get back to you soon.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot — hidden from users, catches bots */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
+                  />
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className={labelCls}>NAME</label>
@@ -190,6 +229,12 @@ const Contact = ({ darkMode }) => {
                       className={`${inputCls} resize-none`}
                     />
                   </div>
+
+                  {errorMsg && (
+                    <p className="text-sm text-rose-400 font-medium" role="alert">
+                      {errorMsg}
+                    </p>
+                  )}
 
                   <div className="pt-2">
                     <MagneticButton

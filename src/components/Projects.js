@@ -135,7 +135,7 @@ const Projects = ({ darkMode }) => {
   return (
     <section
       id="projects"
-      className={`relative py-28 sm:py-36 ${darkMode ? 'bg-ink-900/50' : 'bg-white'}`}
+      className="relative py-28 sm:py-36 bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
@@ -150,6 +150,8 @@ const Projects = ({ darkMode }) => {
           {projects.map((p, index) => {
             const flip = index % 2 === 1;
             const accentGlow = `${p.accent.from}33`;
+            const slug = p.title.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+            const idx = String(index + 1).padStart(2, '0');
 
             return (
               <motion.article
@@ -158,17 +160,48 @@ const Projects = ({ darkMode }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-center ${
-                  flip ? 'lg:[&>*:first-child]:order-2' : ''
-                }`}
               >
+                {/* Compiler / build-log strip */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className={`mb-5 flex items-center gap-2 font-mono text-[10px] sm:text-[11px] tracking-wide holo-card rounded-lg px-3 py-2 w-fit max-w-full overflow-hidden ${darkMode ? 'text-ink-400' : 'text-ink-500'}`}
+                >
+                  <span className={darkMode ? 'text-neon-cyan' : 'text-cyan-600'}>$</span>
+                  <span className={darkMode ? 'text-ink-300' : 'text-ink-600'}>compile</span>
+                  <span className={darkMode ? 'text-white' : 'text-ink-900'}>{slug}_{idx}</span>
+                  <span className={darkMode ? 'text-ink-600' : 'text-ink-400'}>—</span>
+                  <motion.span
+                    initial={{ opacity: 0, x: -4 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6, duration: 0.4 }}
+                    className={darkMode ? 'text-emerald-400' : 'text-emerald-600'}
+                  >
+                    ✓ build passed
+                  </motion.span>
+                  <span className={`animate-blink ${darkMode ? 'text-neon-cyan' : 'text-cyan-600'}`}>▋</span>
+                </motion.div>
+
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{
+                    duration: 6 + index * 0.6,
+                    delay: index * 0.4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  className={`grid lg:grid-cols-12 gap-10 lg:gap-14 items-center ${
+                    flip ? 'lg:[&>*:first-child]:order-2' : ''
+                  }`}
+                >
                 {/* Visual preview */}
                 <TiltCard intensity={5} className="lg:col-span-7">
                   <div
-                    className={`relative aspect-[16/11] rounded-3xl overflow-hidden border ${
-                      darkMode
-                        ? 'bg-ink-900 border-ink-800'
-                        : 'bg-white border-ink-200'
+                    className={`relative aspect-[16/11] rounded-3xl overflow-hidden holo-border ${
+                      darkMode ? 'bg-ink-900' : 'bg-white'
                     }`}
                     style={{
                       boxShadow: `0 30px 80px -20px ${accentGlow}, 0 10px 30px -10px rgba(0,0,0,0.2)`,
@@ -343,6 +376,7 @@ const Projects = ({ darkMode }) => {
                     )}
                   </div>
                 </div>
+                </motion.div>
               </motion.article>
             );
           })}

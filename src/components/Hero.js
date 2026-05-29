@@ -32,12 +32,24 @@ const Hero = ({ darkMode }) => {
     <section
       id="hero"
       ref={ref}
-      className={`relative min-h-screen flex items-center overflow-hidden ${
-        darkMode ? 'bg-ink-950' : 'bg-[#fafafa]'
-      }`}
+      className="relative min-h-screen flex items-center overflow-hidden bg-transparent"
     >
-      <div className="absolute inset-0 grid-bg" />
-      <div className="absolute inset-0 bg-radial-brand" />
+      <div className="absolute inset-0 grid-bg opacity-70" />
+      {/* Legibility wash so the headline reads cleanly over the particle field */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: darkMode
+            ? 'radial-gradient(80% 70% at 35% 45%, rgba(4,5,12,0.78), rgba(4,5,12,0.25) 60%, transparent 85%)'
+            : 'radial-gradient(80% 70% at 35% 45%, rgba(238,242,251,0.85), rgba(238,242,251,0.35) 60%, transparent 85%)',
+        }}
+      />
+
+      {/* HUD corner brackets for a holographic interface feel */}
+      <div className={`pointer-events-none absolute top-24 left-6 w-12 h-12 border-l border-t ${darkMode ? 'border-neon-cyan/40' : 'border-brand-500/40'}`} />
+      <div className={`pointer-events-none absolute top-24 right-6 w-12 h-12 border-r border-t ${darkMode ? 'border-neon-cyan/40' : 'border-brand-500/40'}`} />
+      <div className={`pointer-events-none absolute bottom-10 left-6 w-12 h-12 border-l border-b ${darkMode ? 'border-neon-pink/40' : 'border-fuchsia-500/40'}`} />
+      <div className={`pointer-events-none absolute bottom-10 right-6 w-12 h-12 border-r border-b ${darkMode ? 'border-neon-pink/40' : 'border-fuchsia-500/40'}`} />
 
       <motion.div
         style={{ y }}
@@ -45,7 +57,7 @@ const Hero = ({ darkMode }) => {
       />
       <motion.div
         style={{ y: y2 }}
-        className="absolute -bottom-40 -left-32 w-[36rem] h-[36rem] rounded-full opacity-30 blur-3xl bg-glow-500/20"
+        className="absolute -bottom-40 -left-32 w-[36rem] h-[36rem] rounded-full opacity-30 blur-3xl bg-neon-cyan/20"
       />
 
       <motion.div
@@ -82,7 +94,7 @@ const Hero = ({ darkMode }) => {
                 </span>
               </span>
               <span className="block overflow-hidden">
-                <span className="inline-block bg-gradient-to-r from-brand-400 via-brand-300 to-glow-400 bg-clip-text text-transparent">
+                <span className="inline-block aurora-text neon-text">
                   {lastName.split('').map((c, i) => (
                     <motion.span
                       key={i}
@@ -196,12 +208,15 @@ const Hero = ({ darkMode }) => {
             transition={{ delay: 2.8, duration: 0.9 }}
             className="lg:col-span-4 hidden lg:block"
           >
-            <div className={`relative p-6 rounded-2xl gradient-border ${
-              darkMode ? 'bg-ink-900/70' : 'bg-white'
-            }`}>
+            <motion.div
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative p-6 rounded-2xl overflow-hidden holo-card holo-border"
+            >
+              <span className={`absolute top-3 right-3 w-1.5 h-1.5 rounded-full animate-pulse ${darkMode ? 'bg-neon-cyan shadow-neon-cyan' : 'bg-brand-500'}`} />
               <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-[10px] tracking-widest uppercase text-ink-400">
-                  At a glance
+                <span className={`font-mono text-[10px] tracking-widest uppercase ${darkMode ? 'text-neon-cyan' : 'text-brand-600'}`}>
+                  ◇ At a glance
                 </span>
               </div>
               <dl className="space-y-5">
@@ -224,7 +239,7 @@ const Hero = ({ darkMode }) => {
                   Currently Working on Wissen AIDE framework with SpecDev at Wissen Infotech.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
 

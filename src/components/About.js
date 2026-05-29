@@ -23,7 +23,7 @@ const About = ({ darkMode }) => {
   return (
     <section
       id="about"
-      className={`relative py-28 sm:py-36 ${darkMode ? 'bg-ink-950' : 'bg-[#fafafa]'}`}
+      className="relative py-28 sm:py-36 bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
@@ -46,8 +46,8 @@ const About = ({ darkMode }) => {
             <div className="lg:sticky lg:top-28">
               <TiltCard intensity={4}>
                 <div
-                  className={`relative aspect-[4/5] rounded-3xl overflow-hidden gradient-border ${
-                    darkMode ? 'bg-ink-900' : 'bg-white'
+                  className={`relative aspect-[4/5] rounded-3xl overflow-hidden holo-border ${
+                    darkMode ? 'bg-ink-900/40' : 'bg-white/70'
                   }`}
                   style={{
                     boxShadow:
@@ -136,13 +136,9 @@ const About = ({ darkMode }) => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + i * 0.08 }}
                   whileHover={{ y: -4 }}
-                  className={`relative p-6 rounded-xl overflow-hidden spotlight border ${
-                    darkMode
-                      ? 'bg-ink-900/60 border-ink-800'
-                      : 'bg-white border-ink-200'
-                  }`}
+                  className="relative p-6 rounded-xl overflow-hidden spotlight holo-card"
                 >
-                  <div className="font-display font-semibold text-4xl sm:text-5xl tracking-tightest bg-gradient-to-br from-brand-300 to-glow-400 bg-clip-text text-transparent">
+                  <div className="font-display font-semibold text-4xl sm:text-5xl tracking-tightest aurora-text">
                     {s.number}
                   </div>
                   <div className={`mt-2 font-mono text-[10px] tracking-widest uppercase ${
@@ -163,11 +159,7 @@ const About = ({ darkMode }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05, duration: 0.5 }}
-                  className={`spotlight flex items-center gap-3 p-4 rounded-xl border transition-colors ${
-                    darkMode
-                      ? 'border-ink-800 bg-ink-900/40 hover:border-ink-700'
-                      : 'border-ink-200 bg-white hover:border-ink-300'
-                  }`}
+                  className="spotlight flex items-center gap-3 p-4 rounded-xl transition-colors holo-card"
                 >
                   <div className={`p-2 rounded-md ${
                     darkMode ? 'bg-ink-800 text-brand-400' : 'bg-brand-50 text-brand-600'
@@ -195,9 +187,7 @@ const About = ({ darkMode }) => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className={`relative p-7 rounded-2xl overflow-hidden ${
-                darkMode ? 'bg-ink-900 border border-ink-800' : 'bg-white border border-ink-200'
-              }`}
+              className="relative p-7 rounded-2xl overflow-hidden holo-card"
             >
               <div className="absolute inset-0 opacity-60 pointer-events-none bg-radial-brand" />
               <h3 className={`relative font-display font-semibold text-xl mb-4 ${

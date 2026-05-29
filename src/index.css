@@ -18,7 +18,13 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #07070a;
+  /* Deep-space gradient base; the WebGL universe renders behind it. */
+  background-color: #04050c;
+  background-image:
+    radial-gradient(1200px 800px at 15% -10%, rgba(99,102,241,0.10), transparent 60%),
+    radial-gradient(1000px 700px at 90% 10%, rgba(34,211,238,0.08), transparent 55%),
+    radial-gradient(1200px 900px at 50% 110%, rgba(168,85,247,0.10), transparent 60%);
+  background-attachment: fixed;
   color: #e8e8ec;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -27,7 +33,13 @@ body {
 }
 
 body.light {
-  background-color: #fafafa;
+  /* Futuristic light: near-white with soft holographic colour washes. */
+  background-color: #eef2fb;
+  background-image:
+    radial-gradient(1200px 800px at 12% -10%, rgba(99,102,241,0.16), transparent 58%),
+    radial-gradient(1000px 700px at 92% 8%, rgba(8,145,178,0.14), transparent 55%),
+    radial-gradient(1200px 900px at 50% 112%, rgba(192,38,211,0.12), transparent 60%);
+  background-attachment: fixed;
   color: #18181b;
 }
 
@@ -48,7 +60,7 @@ body.light {
 body.light ::-webkit-scrollbar-thumb { border-color: #fafafa; }
 ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #6366f1, #818cf8); }
 
-/* Custom cursor */
+/* ---- Minimal custom cursor (dot + trailing ring) ---- */
 .cursor-dot,
 .cursor-ring {
   position: fixed;
@@ -56,34 +68,49 @@ body.light ::-webkit-scrollbar-thumb { border-color: #fafafa; }
   left: 0;
   pointer-events: none;
   z-index: 9999;
-  transform: translate3d(-50%, -50%, 0);
-  mix-blend-mode: difference;
+  border-radius: 9999px;
   will-change: transform;
 }
+
+/* Precise center dot — tracks 1:1. */
 .cursor-dot {
   width: 6px;
   height: 6px;
-  background: #ffffff;
-  border-radius: 9999px;
-  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease;
+  background: #f4f6ff;
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.6);
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
 }
+
+/* Thin ring — eases smoothly behind the dot. */
 .cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 9999px;
-  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid rgba(180, 200, 255, 0.45);
+  transition: width 0.25s cubic-bezier(0.2,0.7,0.3,1),
+              height 0.25s cubic-bezier(0.2,0.7,0.3,1),
+              border-color 0.25s ease, background-color 0.25s ease;
+}
+
+/* Hover over interactive elements: ring expands + cyan accent, dot recedes. */
+.cursor-hovered .cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(34, 211, 238, 0.7);
+  background-color: rgba(34, 211, 238, 0.06);
 }
 .cursor-hovered .cursor-dot {
-  width: 10px;
-  height: 10px;
+  width: 4px;
+  height: 4px;
+  opacity: 0.6;
 }
-.cursor-hovered .cursor-ring {
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.08);
-}
-@media (max-width: 768px) {
+
+/* Click feedback. */
+.cursor-down .cursor-ring { width: 26px; height: 26px; }
+
+body.light .cursor-dot { background: #0e0e13; box-shadow: 0 0 6px rgba(99,102,241,0.5); }
+body.light .cursor-ring { border-color: rgba(30, 30, 50, 0.35); }
+
+@media (max-width: 768px), (pointer: coarse) {
   .cursor-dot, .cursor-ring { display: none; }
 }
 
@@ -231,4 +258,197 @@ body.light .eyebrow { color: #52525b; }
 input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
   outline: 1px solid rgba(99, 102, 241, 0.6);
   outline-offset: 2px;
+}
+
+/* ============================================================= */
+/*  SCI-FI / HOLOGRAPHIC LAYER                                    */
+/* ============================================================= */
+
+/* Holographic glass card — frosted, neon-edged, with a moving sheen. */
+.holo-card {
+  position: relative;
+  isolation: isolate;
+  /* Opaque enough that text stays crisp over the bright particle field. */
+  background:
+    linear-gradient(160deg, rgba(15,17,32,0.92), rgba(7,8,16,0.88));
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(140, 160, 255, 0.16);
+  box-shadow:
+    0 10px 40px -12px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 1px 0 0 rgba(255,255,255,0.06) inset;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+.holo-card:hover {
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow:
+    0 18px 60px -16px rgba(34,211,238,0.25),
+    0 0 0 1px rgba(34,211,238,0.18) inset,
+    0 1px 0 0 rgba(255,255,255,0.08) inset;
+}
+/* Sweeping holographic sheen across the surface. */
+.holo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.07) 45%, rgba(34,211,238,0.12) 50%, rgba(232,121,249,0.08) 55%, transparent 70%);
+  background-size: 250% 250%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  animation: holoSheen 6s linear infinite;
+  z-index: -1;
+}
+.holo-card:hover::before { opacity: 1; }
+@keyframes holoSheen {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -100% 0; }
+}
+
+body.light .holo-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.7), rgba(255,255,255,0.5));
+  border-color: rgba(99,102,241,0.18);
+  box-shadow: 0 10px 40px -12px rgba(99,102,241,0.2), 0 0 0 1px rgba(0,0,0,0.03) inset;
+}
+
+/* Animated neon conic border (richer than the indigo gradient-border). */
+.holo-border {
+  position: relative;
+  isolation: isolate;
+}
+.holo-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle, 0deg),
+    rgba(34,211,238,0.0) 0deg,
+    rgba(34,211,238,0.9) 70deg,
+    rgba(168,85,247,0.8) 150deg,
+    rgba(232,121,249,0.6) 220deg,
+    rgba(34,211,238,0.0) 320deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: spinAngle 7s linear infinite;
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.holo-border:hover::after { opacity: 1; }
+
+/* Neon text glow for headline accents. */
+.neon-text {
+  text-shadow:
+    0 0 8px rgba(34,211,238,0.45),
+    0 0 24px rgba(99,102,241,0.35);
+}
+body.light .neon-text {
+  text-shadow:
+    0 0 14px rgba(99,102,241,0.25),
+    0 1px 2px rgba(0,0,0,0.08);
+}
+
+/* Aurora gradient text (animated). */
+.aurora-text {
+  background: linear-gradient(90deg, #818cf8, #22d3ee, #e879f9, #818cf8);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auroraText 8s linear infinite;
+}
+/* Deeper hues so the gradient stays legible on a light background.
+   NOTE: the `background` shorthand resets background-clip to border-box, so the
+   clip + transparent fill must be re-declared here or the gradient paints as a
+   solid block instead of clipping to the text. */
+body.light .aurora-text {
+  background: linear-gradient(90deg, #4f46e5, #0891b2, #c026d3, #4f46e5);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@keyframes auroraText {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+/* Scanline overlay for the holographic / interface feel. */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.025) 0px,
+    rgba(255,255,255,0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* Global dimming scrim — between the WebGL canvas (-z-10) and content (z 0).
+   Tames the bright additive particles so text everywhere stays readable. */
+.universe-dim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(4, 5, 12, 0.46);
+}
+/* Light theme: a soft white veil so the mesh reads as ambient, not busy. */
+.universe-dim--light {
+  background: rgba(238, 242, 251, 0.55);
+}
+
+/* Full-screen vignette + faint scanline that sells the "screen" atmosphere. */
+.universe-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(2,3,8,0.55) 100%);
+}
+.universe-vignette--light {
+  background:
+    radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(150,160,200,0.22) 100%);
+}
+.universe-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Animated aurora ribbon background for sections. */
+.aurora-bg {
+  background: linear-gradient(120deg, rgba(99,102,241,0.18), rgba(34,211,238,0.12) 30%, rgba(232,121,249,0.14) 60%, rgba(99,102,241,0.18));
+  background-size: 300% 300%;
+  animation: aurora 18s ease infinite;
+}
+@keyframes aurora {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+
+/* Respect reduced motion globally for the heavy ambient animations. */
+@media (prefers-reduced-motion: reduce) {
+  .holo-card::before,
+  .holo-border::after,
+  .aurora-text,
+  .aurora-bg,
+  .text-shimmer { animation: none !important; }
 }

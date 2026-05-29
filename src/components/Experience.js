@@ -58,9 +58,7 @@ const Experience = ({ darkMode }) => {
   return (
     <section
       id="experience"
-      className={`relative py-28 sm:py-36 ${
-        darkMode ? 'bg-ink-900/50' : 'bg-white'
-      }`}
+      className="relative py-28 sm:py-36 bg-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <SectionHeading
@@ -197,9 +195,7 @@ const Experience = ({ darkMode }) => {
           }`}>
             Education
           </h3>
-          <div className={`flex items-start gap-5 p-6 rounded-2xl border ${
-            darkMode ? 'bg-ink-900/60 border-ink-800' : 'bg-white border-ink-200'
-          }`}>
+          <div className="flex items-start gap-5 p-6 rounded-2xl holo-card">
             <div className="p-3 rounded-lg bg-gradient-to-br from-brand-500 to-glow-500 shrink-0">
               <GraduationCap className="w-5 h-5 text-white" />
             </div>
