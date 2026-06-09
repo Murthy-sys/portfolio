@@ -14,7 +14,8 @@ const Contact = ({ darkMode }) => {
   // inbox address (mmurthy7702@gmail.com); emails are delivered there.
   // Public by design (it only routes to your inbox), but kept in an env var.
   const ACCESS_KEY =
-    process.env.REACT_APP_WEB3FORMS_KEY || 'YOUR_WEB3FORMS_ACCESS_KEY';
+    process.env.REACT_APP_WEB3FORMS_KEY ||
+    'e54ab7b9-789e-4108-a68f-c6f86b385ade';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
